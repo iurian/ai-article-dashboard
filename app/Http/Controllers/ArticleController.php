@@ -65,12 +65,18 @@ class ArticleController extends Controller
   // Update an existing article
   public function update(Request $request, $id)
   {
-    $request->validate($this->articleValidationRules());
 
     $article = Article::find($id);
 
-    if (!$article) {
-      return response()->json(['message' => 'Article not found'], Response::HTTP_NOT_FOUND);
+    // Define validation rules
+    $rules = $this->articleValidationRules(true);
+
+    // Validate the request
+    $validator = Validator::make($request->all(), $rules);
+
+    // Check if validation fails
+    if ($validator->fails()) {
+      return response()->json($validator->errors(), Response::HTTP_UNPROCESSABLE_ENTITY);
     }
 
     $article->update($request->all());

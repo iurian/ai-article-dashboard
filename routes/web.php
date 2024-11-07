@@ -29,7 +29,7 @@ $router->group(['prefix' => 'api/articles'], function () use ($router) {
     $router->get('/', 'ArticleController@index');
     $router->post('/', 'ArticleController@store');
     $router->get('/{id}', 'ArticleController@show');
-    $router->put('/{id}', 'UserController@update');
+    $router->put('/{id}', 'ArticleController@update');
     $router->delete('/{id}', 'ArticleController@destroy');
 });
 
