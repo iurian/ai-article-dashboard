@@ -32,3 +32,8 @@ $router->group(['prefix' => 'api/articles'], function () use ($router) {
     $router->put('/{id}', 'UserController@update');
     $router->delete('/{id}', 'ArticleController@destroy');
 });
+
+// Handle preflight requests
+$router->options('{any:.*}', function () {
+    return response('', 200);
+});
