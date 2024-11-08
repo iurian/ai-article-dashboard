@@ -30,16 +30,18 @@ class ArticleSeeder extends Seeder
             'https://archintel.com/wp-content/uploads/2019/11/partners-discussing-business-over-coffee-PYCDL5E-scaled-e1573747649730.jpg'
         ];
 
+        $status = ['For Edit', 'Published'];
+
 
         // Seed 10 articles
-        for ($i = 1; $i <= 10; $i++) {
+        for ($i = 1; $i <= 50; $i++) {
             Article::create([
                 'image' => $images[array_rand($images)], // Ensure this is a valid URL
                 'title' => 'Article Title ' . $i,
-                'link' => 'http://archintel.com/article' . $i,
+                'link' => 'http://archintel.com/articles/' . $i,
                 'date' => Carbon::now()->subDays(rand(0, 30)), // Random date within the last 30 days
                 'content' => 'Content for article ' . $i . '. This is a sample content text.',
-                'status' => 'Published', // Change status randomly if needed
+                'status' => $status[array_rand($status)], // Change status randomly if needed
                 'writer_id' => $users->random()->id, // Assign a random user as writer
                 'editor_id' => $users->random()->id, // Assign a random user as editor
                 'company_id' => $companies->random()->id, // Assign a random company
